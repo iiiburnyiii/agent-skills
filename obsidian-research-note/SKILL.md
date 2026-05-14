@@ -1,11 +1,11 @@
 ---
 name: obsidian-research-note
-description: "Create high-quality Obsidian research notes in the user's `Resources/` vault by combining web research with vault context. Use this skill whenever the user wants to research, compare, choose, shortlist, review, or create/update a \"ресерч\" note, especially for notes under `Resources/`, software or hardware comparisons, buying decisions, current-year overviews, or Russian Obsidian notes with sources. Trigger this skill even when the user phrases the task loosely, for example: \"разобраться\", \"сравнить варианты\", \"выбрать\", \"сделать ресерч\", or \"собрать заметку\"."
+description: "Create high-quality Obsidian research notes in the user's vault by combining web research with vault context. Use this skill whenever the user wants to research, compare, choose, shortlist, review, or create/update a research note."
 ---
 
 # Obsidian Research Note
 
-Use this skill to create practical research notes for an Obsidian vault, matching the style of existing notes such as `Resources/* - ресерч YYYY.md`.
+Use this skill to create practical research notes for an Obsidian vault, matching the style of existing notes in `Resources/` folder.
 
 The target output is not an academic report. It is a useful decision document: clear context, explicit criteria, shortlist, tradeoffs, risks, recommendation, and sources.
 
@@ -82,16 +82,13 @@ Follow the vault's existing research-note conventions:
 
 ```yaml
 ---
-title: <Russian title> - ресерч <year>
 categories:
   - "[[Category]]"
 tags:
   - resources/research
   - <domain/tag>
 aliases:
-  - <English alias or alternative title>
-created: YYYY-MM-DDTHH:mm
-updated: YYYY-MM-DDTHH:mm
+  - <Russian alias or alternative title>
 ---
 ```
 
@@ -99,10 +96,7 @@ Guidelines:
 
 - Use `resources/research` for research notes.
 - Propose `categories` and `tags` in the plan before writing.
-- Prefer Russian titles for the note body and English aliases for discoverability.
-- Use `categories: "[[Single Category]]"` only if that style is already dominant in nearby notes; otherwise use a YAML list for multiple categories.
-- Use the current year in the title when freshness matters. If the topic is evergreen, omit the year unless the user asks for a current-year snapshot.
-- Use local ISO-like timestamps consistent with the vault, e.g. `2026-04-27T14:17`.
+- Prefer English titles for the note body and Russian aliases for discoverability.
 
 ## Default Note Structure
 
