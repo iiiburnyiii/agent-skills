@@ -38,7 +38,7 @@ If a preferred tool is unavailable, fall back gracefully to general-purpose tool
    - Build a compact link map: existing notes to link, likely parent categories, related concepts, and possible duplicate or overlapping notes.
    - Treat a wikilink as confirmed only if you actually found a matching note in the vault.
    - Prefer existing wikilinks for categories and related concepts instead of inventing new names.
-   - If no exact note exists but a related concept may deserve a note later, keep it out of confirmed links and mention it separately as a candidate.
+   - If no exact note exists but the concept is a product, tool, technology, or proper name that may deserve a note later — mark it as a forward-link candidate. These still get wikilinks in the final note (so connections light up when the note is created), but list them in the plan under `Кандидаты` to distinguish from confirmed notes.
    - If a likely target note already exists, treat the task as a potential update and surface that option in the clarification step.
 
    **Vault-discovery checklist** — run as many of these as the topic warrants before producing a plan:
@@ -79,6 +79,8 @@ If a preferred tool is unavailable, fall back gracefully to general-purpose tool
    - Check that sources exist and are not fabricated.
    - Check that source coverage satisfies the diversity rule in `Source Policy`.
    - Check that the recommendation follows from the stated criteria.
+   - Check that all products, tools, technologies, and proper names are wikilinked on first prose occurrence (not code blocks).
+   - Check that no term is wikilinked more than once.
    - For updates: confirm previously valid wikilinks were not broken.
 
 ## Plan Format
@@ -95,7 +97,7 @@ Present the plan with this checklist:
 - **Критерии:** <3-7 comparison criteria, each measurable when possible>
 - **Метаданные:** `categories`, `tags`, `aliases`, target path
 - **Связи:** <confirmed existing notes/categories to link>
-- **Кандидаты:** <possible future notes or uncertain concepts that were not found as existing notes>
+- **Кандидаты:** <products, tools, technologies, proper names that don't have notes yet but get forward-linked in the final note>
 - **Структура:** <proposed section outline>
 - **Источники:** <source types/search directions, broken down by category; mention freshness assumptions>
 - **Ответы на уточнения:** <summary of the user's answers to the clarification round, including defaults you assumed>
@@ -250,15 +252,22 @@ See `examples/note-fragments-good-vs-bad.md` for source-section and conflict-han
 
 ## Vault Integration
 
+### Wikilink rules
+
 - Use `[[wikilinks]]` for internal concepts, categories, tools, and related notes that exist in the vault or are clearly stable enough to deserve a note.
-- Do not over-link every term. Link only concepts useful for navigation.
+- **Products, tools, technologies, and proper names get wikilinks on first occurrence even if a dedicated note doesn't exist yet.** When the note is created later, backlinks connect automatically. Prefer the most natural note name: `[[Claude Code]]`, `[[ESLint]]`, `[[Zod]]`.
+- Use aliases for display names that differ from the expected note name: `[[PostgreSQL|Postgres]]`, `[[Anthropic|Антропик]]`.
+- Do not wikilink generic concepts or common nouns — only named things that could plausibly become a standalone note.
+- Do not wikilink the same term twice. First occurrence only (excluding frontmatter).
 - Reuse existing categories and tag style where possible.
+
+### Plan and discovery
+
 - Before creating a note, explicitly research existing notes so links are based on the user's current knowledge graph, not generic assumptions.
-- In the plan, include a compact `Связи` line with only confirmed existing notes/categories.
-- If you are unsure whether a note exists, verify first. If verification is incomplete, say so explicitly instead of presenting the link as real.
-- Put non-existing but plausible future notes under `Кандидаты`, not under `Связи`.
-- In the final note, surface plan-stage `Кандидаты` (when worth flagging) inside an optional `## Связанные кандидаты` section as plain text, **without** `[[wikilinks]]` — wikilinks are reserved for notes that actually exist. Omit the section if there are no candidates worth keeping.
-- In the final note, prefer links discovered in the vault over newly invented links. Do not create speculative wikilinks by default.
+- In the plan, `Связи` lists only confirmed existing notes/categories.
+- Forward-link candidates (products/tools/tech without notes yet) go under `Кандидаты` in the plan.
+- In the final note, forward-linked candidates appear as regular `[[wikilinks]]` in prose — no separate section needed. Their presence in the plan's `Кандидаты` is the record.
+- If you are unsure whether a note exists or whether a term is notable enough for a future note, ask. Don't guess.
 - Do not modify unrelated notes unless the user explicitly asks.
 
 See `examples/note-fragments-good-vs-bad.md` for wikilink and candidate-section examples.
