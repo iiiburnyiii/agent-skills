@@ -43,6 +43,12 @@ For each item worth keeping, decide where it belongs:
 
 When unclear, ask the user. Don't guess the destination.
 
+When routing to **AGENTS.md**, pick the right level:
+- Always-applies, workspace-wide → **root AGENTS.md**
+- Directory-specific conventions → **nested AGENTS.md** in that directory
+- Deep domain workflows with side-effects → **skill** (`.agents/skills/`)
+- Absolute deterministic, no-exception rules → **recommend a hook**, not an instruction
+
 ### 3. Write concise, actionable entries
 
 Each entry must state:
@@ -51,6 +57,11 @@ Each entry must state:
 - **How to apply** — when this kicks in (only if non-obvious)
 
 Style: terse, no filler, lists over paragraphs, exact commands and file paths over "the appropriate command".
+
+For entries routed to **AGENTS.md**:
+- **Imperative, not advisory.** "Use X", "Never do Y" — not "prefer X", "be careful with Y".
+- **Negative examples are as important as positive ones.** State what NOT to do with "never", "запрещено", "don't".
+- **Deletion test:** if this line were removed, would the agent start making measurable mistakes? If not — omit.
 
 ### 4. Verify
 
@@ -64,6 +75,13 @@ Re-read each entry cold. Can a future fresh-context agent apply it without askin
 - Don't commit to AGENTS.md without showing the user the proposed diff
 - Memory edits can happen directly (per memory usage guidelines in AGENTS.md)
 - Never write without confirmation
+
+For entries routed to **AGENTS.md**:
+- Don't add rules for anything the agent can read from config files (`package.json`, `tsconfig.json`, `.eslintrc`)
+- Don't add standard language/framework conventions already in training data
+- Prefer hooks over instructions for absolute, no-exception rules
+- Root AGENTS.md ≤ 200 lines. If approaching the limit — propose moving entries to nested AGENTS.md or skills
+- Don't duplicate entries already in MEMORY.md unless they become team-wide conventions (then copy to AGENTS.md and remove from MEMORY.md)
 
 ## Output
 
