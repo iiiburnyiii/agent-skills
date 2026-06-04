@@ -145,16 +145,14 @@ Problems:
 - [[Resources/E-Readers - ресерч 2024]]
 - [[Resources/Obsidian Mobile]]
 
-## Связанные кандидаты
-
-KOReader, E-Ink Carta 1300, Kaleido 3, sideload Obsidian on Android, front-light CCT. Эти концепции встречались в обзорах, но отдельных нот в vault на момент 2026-XX-XX нет; если решишь завести — добавь сюда `[[wikilink]]` после создания.
+В основном тексте forward-link candidates получают `[[wikilink]]` на первом смысловом упоминании: [[KOReader]], [[E-Ink Carta 1300]], [[Kaleido 3]], [[sideload Obsidian on Android]], [[front-light CCT]]. Отдельный раздел для них не нужен; список кандидатов фиксируется в плане.
 ```
 
 Why it works:
 
 - Only verified vault notes get `[[wikilinks]]`.
-- Plausible-but-missing concepts get a plain-text candidate section per `Vault Integration → "Связанные кандидаты"`.
-- The candidates list is informational, not navigational — no broken links in the graph.
+- Plausible-but-missing concepts are forward-linked once in prose, so backlinks work when dedicated notes are created later.
+- The plan remains the record of which links were forward-link candidates rather than confirmed vault notes.
 
 ---
 

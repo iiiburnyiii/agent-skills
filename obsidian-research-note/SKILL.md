@@ -1,6 +1,6 @@
 ---
 name: obsidian-research-note
-description: "Create high-quality Obsidian research notes in the user's vault by combining web research with vault context. Use this skill whenever the user wants to research, compare, choose, shortlist, review, or create/update a research note."
+description: "Create or update practical Obsidian research notes in the user's vault using vault discovery, web research, source verification, wikilinks, categories, tags, and decision-oriented recommendations. Use for requests to research, compare, choose, shortlist, review options, make a buying guide, or turn web findings into an Obsidian note."
 ---
 
 # Obsidian Research Note
@@ -25,16 +25,26 @@ Use the most appropriate tool for each step.
 
 - **Vault discovery:** prefer `obsidian-cli` for note-aware search, backlinks, properties, and vault context. Use file search tools when the CLI is unavailable or when broad repo search is faster.
 - **Note structure and final writing:** use `obsidian-markdown` so frontmatter, callouts, wikilinks, and tables stay valid for Obsidian.
-- **Web research:** use `websearch` for current information, especially on fast-moving topics.
-- **Reading articles/docs/pages:** prefer `defuddle` for clean extraction of web pages before summarizing them into the note.
+- **Web research:** use `web_search` with `queries: [...]` for current information, especially on fast-moving topics. Prefer 2-4 varied search angles over one generic query.
+- **Reading articles/docs/pages:** prefer `defuddle` for clean extraction of web pages before summarizing them into the note. Use `fetch_content` when a page, repo, or video needs close reading.
 - **Obsidian-native structures:** if the result should integrate with Bases or Canvas, use `obsidian-bases` or `json-canvas` rather than inventing custom formats.
 
 If a preferred tool is unavailable, fall back gracefully to general-purpose tools without changing the workflow expectations.
 
+For web research, do not cite a source unless you opened, extracted, or otherwise inspected enough content to support the cited claim. Search snippets are leads, not evidence.
+
+## Interaction Modes
+
+Default mode is careful and interactive: vault discovery, clarifying questions, plan, user confirmation, then writing.
+
+Use a lighter path when the user asks for a quick note, overview, or draft; when the topic is evergreen rather than a decision; or when missing details do not materially change the research direction. In light mode, ask at most 3-5 high-impact questions or state assumptions in the plan.
+
+Use autonomous mode when the user says «сразу сделай», «без уточнений», «skip confirmation», «автономно», or equivalent. Still discover vault context first, state assumptions compactly, create or update the note, then report verification and unresolved assumptions.
+
 ## Core Workflow
 
 1. Discover the current vault before anything else.
-   - Run the vault-discovery checklist (below) to find existing notes, categories, tags, aliases, and prior snapshots.
+   - Run the vault-discovery checklist (below) to find existing notes, categories, tags, English names, and prior snapshots.
    - Build a compact link map: existing notes to link, likely parent categories, related concepts, and possible duplicate or overlapping notes.
    - Treat a wikilink as confirmed only if you actually found a matching note in the vault.
    - Prefer existing wikilinks for categories and related concepts instead of inventing new names.
@@ -43,7 +53,7 @@ If a preferred tool is unavailable, fall back gracefully to general-purpose tool
 
    **Vault-discovery checklist** — run as many of these as the topic warrants before producing a plan:
    - Search by Russian title variants with common morphology (root forms, plurals, synonyms).
-   - Search by English alias (product names, tool names, technology terms).
+   - Search by English product, tool, technology, and standard names.
    - Search by tag `resources/research` plus the likely domain tag.
    - Inspect backlinks on probable parent-category notes (`[[Category]]`).
    - Search by individual product/option names when this is a comparison.
@@ -59,7 +69,7 @@ If a preferred tool is unavailable, fall back gracefully to general-purpose tool
 
 3. Produce the research plan after answers come in.
    - Use the structure in `Plan Format`. The `Ответы на уточнения` field reflects the answers from §2.
-   - Do not create or edit the final note until the user confirms the plan, unless they explicitly asked to skip confirmation.
+   - Do not create or edit the final note until the user confirms the plan, unless they explicitly asked to skip confirmation or use autonomous mode.
    - See `examples/plan-good-vs-bad.md` for a full good/bad pair.
 
 4. Do the web research after the plan is confirmed.
@@ -70,6 +80,8 @@ If a preferred tool is unavailable, fall back gracefully to general-purpose tool
 
 5. Write the note in Obsidian-flavored Markdown.
    - Use YAML properties, wikilinks, tables, and callouts where they improve readability.
+   - Do not manually set `created` or `updated`; vault automation manages them.
+   - When a folder has Templater automation, prefer the vault-aware creation path when available, then edit only user-controlled properties such as `categories` and `tags`.
    - Save under `Resources/` by default unless a more specific existing subfolder is clearly better or the user explicitly requested a different path.
    - For updates of existing notes, preserve current links and structure; summarise what is changing and why before applying.
 
@@ -82,6 +94,7 @@ If a preferred tool is unavailable, fall back gracefully to general-purpose tool
    - Check that all products, tools, technologies, and proper names are wikilinked on first prose occurrence (not code blocks).
    - Check that no term is wikilinked more than once.
    - For updates: confirm previously valid wikilinks were not broken.
+   - Inspect the final changed note or diff, validate frontmatter when practical, and report the note path plus unresolved assumptions.
 
 ## Plan Format
 
@@ -95,7 +108,7 @@ Present the plan with this checklist:
 - **Тема:** <working title>
 - **Цель:** <what decision or understanding the note should enable>
 - **Критерии:** <3-7 comparison criteria, each measurable when possible>
-- **Метаданные:** `categories`, `tags`, `aliases`, target path
+- **Метаданные:** `categories`, `tags`, target path
 - **Связи:** <confirmed existing notes/categories to link>
 - **Кандидаты:** <products, tools, technologies, proper names that don't have notes yet but get forward-linked in the final note>
 - **Структура:** <proposed section outline>
@@ -124,6 +137,8 @@ Required clarification topics — go through each one and ask unless the answer 
 
 Where you can offer a sensible default, state it: «по умолчанию приму X, поправь если не так». This lets the user skim and only correct cases where the default is wrong.
 
+For non-decision evergreen notes, skip buying-specific questions such as budget, region, and platform unless they affect the research outcome.
+
 See `examples/clarifying-questions.md` for good/bad patterns.
 
 ## Metadata Conventions
@@ -137,8 +152,6 @@ categories:
 tags:
   - resources/research
   - <domain/tag>
-aliases:
-  - <Russian alias or alternative title>
 ---
 ```
 
@@ -146,7 +159,7 @@ Guidelines:
 
 - Use `resources/research` for research notes.
 - Propose `categories` and `tags` in the plan before writing.
-- Prefer English titles for the note body and Russian aliases for discoverability.
+- Choose the note title according to vault naming conventions: technical notes use English Title Case; Russian inbox or evergreen notes use descriptive Russian titles.
 
 ## Default Note Structure
 
@@ -197,10 +210,12 @@ Adapt the structure to the topic, but keep this backbone when it fits:
 
 Use alternative section names when they better fit the domain. For example, software tools may need `## Для Личного Использования`, `## Для Работы`, or `## Что Тестировать Перед Выбором`; hardware buying guides may need `## Рекомендованные Связки`.
 
+If the topic is not a choice or comparison, replace shortlist sections with sections such as `## Основная Идея`, `## Карта Понятий`, `## Что Важно Запомнить`, `## Практическое Применение`, and `## Открытые Вопросы`.
+
 ## Writing Style
 
 - Write primarily in Russian.
-- Use English names for products, tools, standards, APIs, and aliases when that improves searchability.
+- Use English names for products, tools, standards, and APIs when that improves searchability.
 - Be practical and opinionated, not neutral to the point of being unhelpful.
 - State assumptions explicitly when the user's context is incomplete.
 - Prefer concise paragraphs, ranked lists, and comparison tables.
@@ -256,7 +271,7 @@ See `examples/note-fragments-good-vs-bad.md` for source-section and conflict-han
 
 - Use `[[wikilinks]]` for internal concepts, categories, tools, and related notes that exist in the vault or are clearly stable enough to deserve a note.
 - **Products, tools, technologies, and proper names get wikilinks on first occurrence even if a dedicated note doesn't exist yet.** When the note is created later, backlinks connect automatically. Prefer the most natural note name: `[[Claude Code]]`, `[[ESLint]]`, `[[Zod]]`.
-- Use aliases for display names that differ from the expected note name: `[[PostgreSQL|Postgres]]`, `[[Anthropic|Антропик]]`.
+- Use pipe display text when the visible text should differ from the note name: `[[PostgreSQL|Postgres]]`, `[[Anthropic|Антропик]]`.
 - Do not wikilink generic concepts or common nouns — only named things that could plausibly become a standalone note.
 - Do not wikilink the same term twice. First occurrence only (excluding frontmatter).
 - Reuse existing categories and tag style where possible.

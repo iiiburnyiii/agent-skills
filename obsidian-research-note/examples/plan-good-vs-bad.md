@@ -24,7 +24,7 @@ Scenario assumptions (answered in the clarification round):
 - **Тема:** Электронные книги
 - **Цель:** Выбрать электронную книгу
 - **Критерии:** хороший экран, нормальная цена, удобство, автономность
-- **Метаданные:** categories — [[Электронные книги]]; tags — `resources/research`, `gadgets`; aliases — нет; путь — Resources/
+- **Метаданные:** categories — [[Электронные книги]]; tags — `resources/research`, `gadgets`; путь — Resources/
 - **Связи:** [[Электронные книги]], [[Чтение]]
 - **Кандидаты:** —
 - **Структура:** Контекст, Сравнение, Что выбрать, Источники
@@ -35,7 +35,7 @@ Scenario assumptions (answered in the clarification round):
 What is wrong:
 
 - **Тема / Цель / Критерии** are too vague to discriminate options. «Хороший экран» does not exclude anything; «нормальная цена» dodges the budget that the user already named.
-- **Метаданные**: `[[Электронные книги]]` is presented as confirmed without checking whether it exists in the vault — likely a phantom link. Title in the plan is generic; no English alias is proposed.
+- **Метаданные**: `[[Электронные книги]]` is presented as confirmed without checking whether it exists in the vault — likely a phantom link. Title in the plan is generic.
 - **Связи** mixes confirmed and unconfirmed wikilinks. `Plan Format` requires only confirmed entries here.
 - **Кандидаты** is empty even though `[[Чтение]]`, `[[E-Ink]]`, `[[KOReader]]` and the existing `Resources/E-Readers - ресерч 2024.md` are obvious candidates to flag.
 - **Структура** drops sections the topic needs: shortlist, detailed shortlist, practical notes.
@@ -64,13 +64,12 @@ What is wrong:
   - `title`: «Compact E-Readers 2026»
   - `categories`: `[[Resources/Reading]]` (подтверждена в vault)
   - `tags`: `resources/research`, `hardware/e-reader`
-  - `aliases`: «Электронные книги — ресерч 2026», «Compact e-readers shortlist 2026»
   - target path: `Resources/Compact E-Readers 2026.md`
 - **Связи (подтверждены в vault):**
   - `[[Resources/Reading]]`
   - `[[Resources/E-Readers - ресерч 2024]]` (предыдущий снапшот; сошлюсь на него в `## Контекст`)
   - `[[Resources/Obsidian Mobile]]`
-- **Кандидаты (не существуют в vault, выношу плоским текстом в финальной заметке):**
+- **Кандидаты (не существуют в vault, получат forward-links на первом упоминании):**
   - KOReader, Obsidian-on-Android sideload, E-Ink Carta 1300, frontlight CCT.
 - **Структура:**
   - Контекст (профиль, ограничения, что изменилось с 2024)
@@ -81,7 +80,6 @@ What is wrong:
   - Что выбрать (3 сценария: PDF-приоритет, EPUB-приоритет, гибкость)
   - Практические замечания (импорт, прошивки, sideload-гайд)
   - Расхождения в источниках (если выявятся материальные)
-  - Связанные кандидаты (плоский список)
   - Источники (сгруппированные)
 - **Источники (по категориям):**
   - **Primary**: страницы продуктов Boox, PocketBook, Kindle, Kobo, reMarkable; release notes по прошивкам 2025-2026.
@@ -105,7 +103,7 @@ Why it works:
 - **Критерии** are measurable: дюймы, недели автономности, ценовая граница, конкретные технические требования.
 - **Метаданные** declare which wikilinks are confirmed and which are candidates, honouring `Vault Integration`.
 - **Связи** contain only nodes verified during vault discovery; everything else is parked in **Кандидаты**.
-- **Структура** anticipates the optional `Расхождения В Источниках` and the `Связанные кандидаты` section per `SKILL.md`.
+- **Структура** anticipates the optional `Расхождения В Источниках` section without adding a separate candidate section.
 - **Источники** is split by category and honours `Source Policy → diversity`; ratio across primary/reviews/community/comparisons is balanced.
 - **Ответы на уточнения** records the user's answers so the plan can be confirmed at a glance.
 - **Конфликты в источниках** is present even when empty, to signal that the dimension is being watched.
