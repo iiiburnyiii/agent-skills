@@ -86,15 +86,9 @@ Use autonomous mode when the user says «сразу сделай», «без у�
    - For updates of existing notes, preserve current links and structure; summarise what is changing and why before applying.
 
 6. Verify the finished note.
-   - Check that frontmatter is valid YAML.
-   - Check that the title and first H1 match.
-   - Check that sources exist and are not fabricated.
-   - Check that source coverage satisfies the diversity rule in `Source Policy`.
-   - Check that the recommendation follows from the stated criteria.
-   - Check that all products, tools, technologies, and proper names are wikilinked on first prose occurrence (not code blocks).
-   - Check that no term is wikilinked more than once.
+   - Run the full validation pass in `references/validation.md`: structural integrity, sources, wikilinks, web links, moderate brevity, and readability.
    - For updates: confirm previously valid wikilinks were not broken.
-   - Inspect the final changed note or diff, validate frontmatter when practical, and report the note path plus unresolved assumptions.
+   - Inspect the final changed note or diff and report the note path plus unresolved assumptions.
 
 ## Plan Format
 
@@ -289,11 +283,4 @@ See `examples/note-fragments-good-vs-bad.md` for wikilink and candidate-section 
 
 ## Quality Checklist
 
-Before finishing, ensure:
-
-- The note answers the user's actual decision or research question.
-- The recommendation is visible near the top and supported later.
-- Tables have useful criteria rather than decorative columns.
-- Tradeoffs and risks are explicit.
-- The note can stand alone months later: context, assumptions, and source date/freshness are understandable.
-- The file path, frontmatter title, and H1 are consistent.
+The finishing checklist lives in `references/validation.md` (sections E and F cover brevity, readability, and decision quality). Run it as part of Core Workflow §6.
