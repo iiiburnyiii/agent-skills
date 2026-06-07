@@ -210,7 +210,7 @@ If the topic is not a choice or comparison, replace shortlist sections with sect
 
 - Write primarily in Russian.
 - Use English names for products, tools, standards, and APIs when that improves searchability.
-- Be practical and opinionated, not neutral to the point of being unhelpful.
+- Be practical and balanced, not neutral to the point of being unhelpful.
 - State assumptions explicitly when the user's context is incomplete.
 - Prefer concise paragraphs, ranked lists, and comparison tables.
 - Include risks and disqualifiers, not only pros.

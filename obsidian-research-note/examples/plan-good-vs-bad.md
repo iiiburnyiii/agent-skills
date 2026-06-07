@@ -12,7 +12,7 @@ Scenario assumptions (answered in the clarification round):
 - Freshness: 2026 snapshot.
 - Scope: shortlist of 5.
 - Update vs create: existing `Resources/E-Readers - ресерч 2024.md` found in vault; user chose **create new** for 2026.
-- Tone: opinionated.
+- Tone: balanced.
 
 ---
 
@@ -91,7 +91,7 @@ What is wrong:
   - Бюджет ≤ $400, регион Россия + EU import.
   - PDF/EPUB 60/40, типизированные заметки, без стилуса.
   - Obsidian sideload обязателен; вендор-лок — дисквалификатор.
-  - 2026 snapshot, шортлист 5, opinionated тон.
+  - 2026 snapshot, шортлист 5, balanced тон.
   - В vault найдена `Resources/E-Readers - ресерч 2024.md` — пользователь выбрал **создать новую заметку** для 2026, на старую сошлюсь.
   - Front-light с регулировкой температуры: обязательно.
 - **Конфликты в источниках:** на этапе плана значимых нет; если всплывут (типично — автономность по обзорам vs практике форумов) — отражу инлайн или в отдельной секции.

@@ -93,7 +93,7 @@ Problems:
 
 - Restates the criteria as the answer. The user came for a recommendation.
 - No mapping from user profile to specific options.
-- Breaks `Writing Style → "Be practical and opinionated, not neutral to the point of being unhelpful"`.
+- Breaks `Writing Style → "Be practical and balanced, not neutral to the point of being unhelpful"`.
 
 ### Good
 
